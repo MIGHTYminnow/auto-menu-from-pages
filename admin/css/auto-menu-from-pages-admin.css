@@ -1,0 +1,120 @@
+/**
+ * All of the CSS for your dashboard-specific functionality should be
+ * included in this file.
+ */
+
+body.auto-menu-active #side-sortables,
+body.auto-menu-active #post-body-content > *:not( .menu-settings ):not( .custom-menu-message ),
+body.auto-menu-active .auto-add-pages {
+	display: none !important;
+}
+
+body.auto-menu-active #nav-menus-frame {
+	margin-left: 0;
+}
+
+body.auto-menu-active .menu-note {
+	font-size: 1.1em;
+	font-style: italic;
+}
+
+/* Admin bar link */
+#wp-admin-bar-sync_auto_menu {
+	display: block !important; /* For mobile display */
+}
+
+#wp-admin-bar-sync_auto_menu a {
+	-webkit-transition: all .2s ease;
+	   -moz-transition: all .2s ease;
+	    -ms-transition: all .2s ease;
+	     -o-transition: all .2s ease;
+	        transition: all .2s ease;
+}
+
+#wp-admin-bar-sync_auto_menu a.success {
+	background-color: #090 !important;
+}
+
+#wp-admin-bar-sync_auto_menu a.success .ab-label,
+#wp-admin-bar-sync_auto_menu a.success .ab-icon:before {
+	color: #fff !important;
+}
+
+@media (max-width: 782px) {
+
+	#wp-admin-bar-sync_auto_menu .ab-label {
+		display: none;
+	}
+
+}
+
+#wp-admin-bar-sync_auto_menu .ab-icon:before {
+	content: "\f463";
+	top: 2px;
+}
+
+#wp-admin-bar-sync_auto_menu a.success .ab-icon:before {
+	content: "\f147";
+}
+
+#wp-admin-bar-sync_auto_menu .syncing .ab-icon:before {
+	-webkit-animation: rotating 2s linear infinite;
+	-moz-animation: rotating 2s linear infinite;
+	-ms-animation: rotating 2s linear infinite;
+	-o-animation: rotating 2s linear infinite;
+	animation: rotating 2s linear infinite;
+}
+
+@-webkit-keyframes rotating /* Safari and Chrome */ {
+	from {
+		-ms-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	to {
+		-ms-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+@keyframes rotating {
+	from {
+		-ms-transform: rotate(0deg);
+		-moz-transform: rotate(0deg);
+		-webkit-transform: rotate(0deg);
+		-o-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
+	to {
+		-ms-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-webkit-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		transform: rotate(360deg);
+	}
+}
+
+/* Admin notice */
+.mm-notice svg {
+	float: right;
+	width: 120px;
+	max-width: 30%;
+	margin: 20px 0 40px 40px;
+}
+
+.mm-notice svg path {
+	fill: #333;
+	-webkit-transition: all .25s ease;
+	   -moz-transition: all .25s ease;
+	    -ms-transition: all .25s ease;
+	     -o-transition: all .25s ease;
+	        transition: all .25s ease;
+}
+
+.mm-notice a:hover svg path {
+	fill: #555;
+}
