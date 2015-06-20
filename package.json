@@ -1,7 +1,7 @@
 {
   "title": "Auto Menu From Pages",
   "description": "Automatically generate a navigation menu from your page hierarchy.",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "homepage": "http://wordpress.org/plugins/auto-menu-from-pages",
   "author": {
     "name": "MIGHTYminnow Web Studio & School",
@@ -14,6 +14,7 @@
     "grunt-dev-update": "latest",
     "grunt-prompt": "latest",
     "grunt-text-replace": "latest",
+    "grunt-wp-readme-to-markdown": "latest",
     "grunt-wp-i18n": "latest",
     "grunt-contrib-copy": "^0.7.0"
   },
