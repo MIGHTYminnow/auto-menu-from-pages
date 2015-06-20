@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Auto Menu From Pages 1.2.0\n"
 "Report-Msgid-Bugs-To: "
 "http://wordpress.org/support/plugin/auto-menu-from-pages\n"
-"POT-Creation-Date: 2015-06-20 16:26:22+00:00\n"
+"POT-Creation-Date: 2015-06-20 16:35:27+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,12 +15,16 @@ msgstr ""
 "X-Generator: grunt-wp-i18n 0.5.2\n"
 
 #: admin/class-auto-menu-from-pages-admin.php:170
+#: svn/tags/1.2.0/admin/class-auto-menu-from-pages-admin.php:170
+#: svn/trunk/admin/class-auto-menu-from-pages-admin.php:170
 msgid ""
 "<b>Note:</b> Pages/posts can not be added to this menu, as it is "
 "auto-generated from the existing page hierarchy."
 msgstr ""
 
 #: admin/class-auto-menu-from-pages-admin.php:556
+#: svn/tags/1.2.0/admin/class-auto-menu-from-pages-admin.php:556
+#: svn/trunk/admin/class-auto-menu-from-pages-admin.php:556
 msgid ""
 "\n"
 "\t\t\t\t\t<a href=\"%s\" target=\"_blank\" class=\"logo-link\"><svg "
@@ -447,10 +451,14 @@ msgid ""
 msgstr ""
 
 #: admin/class-auto-menu-from-pages-admin.php:786
+#: svn/tags/1.2.0/admin/class-auto-menu-from-pages-admin.php:786
+#: svn/trunk/admin/class-auto-menu-from-pages-admin.php:786
 msgid "Sync Auto Menu"
 msgstr ""
 
 #: admin/class-auto-menu-from-pages-admin.php:854
+#: svn/tags/1.2.0/admin/class-auto-menu-from-pages-admin.php:854
+#: svn/trunk/admin/class-auto-menu-from-pages-admin.php:854
 msgid "Hide from auto menu."
 msgstr ""
 

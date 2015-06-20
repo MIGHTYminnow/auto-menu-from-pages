@@ -74,6 +74,9 @@ module.exports = function( grunt ) {
 	      		files: {
 	      			'readme.md': 'readme.txt'
 	      		},
+	      		options:{
+   					screenshot_url: 'https://ps.w.org/auto-menu-from-pages/assets/screenshot-1.png?rev=1124934',
+				},
  		 	},
 		},
 	    makepot: {
