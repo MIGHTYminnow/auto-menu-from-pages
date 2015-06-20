@@ -61,7 +61,7 @@ At present, no. The menu auto generates based on your page hierarchy, and theref
 ## Screenshots ##
 
 ### 1. The Auto Menu From Pages menu in action. Looks the same as any other menu, just simplified! ###
-![The Auto Menu From Pages menu in action. Looks the same as any other menu, just simplified!](http://s.wordpress.org/extend/plugins/auto-menu-from-pages/screenshot-1.png)
+![The Auto Menu From Pages menu in action. Looks the same as any other menu, just simplified!](https://ps.w.org/auto-menu-from-pages/assets/screenshot-1.png)
 
 
 ## Changelog ##
