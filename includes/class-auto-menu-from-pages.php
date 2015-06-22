@@ -222,9 +222,22 @@ class Auto_Menu_From_Pages {
 		// Filter admin menu walker to prevent output in menu editor.
 		$this->loader->add_filter( 'wp_edit_nav_menu_walker', $plugin_admin, 'filter_auto_menu_walker_to_hide', 10, 2 );
 
-		// Do metabox functionality to exclude page from auto menu.
+		// Add custom page archive column (necessary for bulk/quick edit functionality).
+		$this->loader->add_action( 'manage_pages_columns', $plugin_admin, 'add_custom_admin_columns', 10, 2 );
+
+		// Render custom page archive column output.
+		$this->loader->add_action( 'manage_pages_custom_column', $plugin_admin, 'render_custom_admin_columns', 10, 2 );
+
+		// Add bulk and quick edit controls.
+		$this->loader->add_action( 'quick_edit_custom_box', $plugin_admin, 'output_bulk_quick_edit_controls', 10, 2 );
+		$this->loader->add_action( 'bulk_edit_custom_box', $plugin_admin, 'output_bulk_quick_edit_controls', 10, 2 );
+
+		// Do metabox functionality to exclude single page from auto menu.
 		$this->loader->add_action( 'add_meta_boxes', $plugin_admin, 'add_metabox' );
 		$this->loader->add_action( 'save_post', $plugin_admin, 'save_metabox' );
+
+		// Filter to save bulk edit pages.
+		$this->loader->add_action( 'wp_ajax_save_bulk_edit_page', $plugin_admin, 'save_bulk_edit_pages' );
 
 		// Synch menu via AJAX.
 		$this->loader->add_action( 'wp_ajax_sync_auto_menu', $plugin_admin, 'force_sync_auto_menu' );

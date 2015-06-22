@@ -851,9 +851,52 @@ class Auto_Menu_From_Pages_Admin {
 
 		echo '<label for="amfp_exclude_from_menu">';
 		echo '<input type="checkbox" id="amfp_exclude_from_menu" name="amfp_exclude_from_menu" value="1" ' . checked( $value, 1, false ) . ' /> ';
-		_e( 'Hide from auto menu.', 'auto-menu-from-pages' );
+		_e( 'Exclude page from auto menu.', 'auto-menu-from-pages' );
 		echo '</label> ';
 
+	}
+
+	public function add_custom_admin_columns($columns) {
+		$columns['_amfp_exclude_from_menu'] = __( 'Exclude From Auto Menu', 'auto-menu-from-pages' );
+		return $columns;
+	}
+
+	public function render_custom_admin_columns( $column_name, $id ) {
+		
+		switch ( $column_name ) {
+			case '_amfp_exclude_from_menu':
+				$exclude = get_post_meta( $id, '_amfp_exclude_from_menu', true );
+				if ( $exclude ) {
+					echo '<span class="dashicons dashicons-yes"></span>';
+				}
+				break;
+		}
+
+	}
+
+	public function output_bulk_quick_edit_controls( $column_name, $post_type ) {
+		
+		// Only proceed if this is the pages archive.
+		if ( 'page' != $post_type || '_amfp_exclude_from_menu' != $column_name ) {
+			return;
+		}
+
+		static $printNonce = TRUE;
+		if ( $printNonce ) {
+			$printNonce = FALSE;
+			wp_nonce_field( $this->plugin_slug, "{$this->plugin_slug}_nonce" );
+		}
+
+		?>
+		<fieldset class="inline-edit-col inline-edit-book">
+			<div class="inline-edit-col column-<?php echo $column_name; ?>">
+				<h4><?php echo $this->plugin_name; ?></h4>
+				<label class="inline-edit-group">
+					<input type="checkbox" name="amfp_exclude_from_menu" value="1" /> <span class="checkbox-title"><?php esc_html_e( 'Exclude from auto menu', 'auto-menu-from-pages' ); ?></span>
+				</label>
+			</div>
+		</fieldset>
+		<?php
 	}
 
 	/**
@@ -900,13 +943,26 @@ class Auto_Menu_From_Pages_Admin {
 		}
 
 		/* OK, it's safe for us to save the data now. */
-
+				
 		// Sanitize user input.
 		$meta_value = isset( $_POST['amfp_exclude_from_menu'] ) ? $_POST['amfp_exclude_from_menu'] : 0;
 
 		// Update the meta field in the database.
 		update_post_meta( $post_id, '_amfp_exclude_from_menu', $meta_value );
 
+	}
+
+	public function save_bulk_edit_pages() {
+		$post_ids = ( ! empty( $_POST[ 'post_ids' ] ) ) ? $_POST[ 'post_ids' ] : array();
+		$amfp_exclude_from_menu = ( ! empty( $_POST[ 'amfp_exclude_from_menu' ] ) ) ? absint( $_POST[ 'amfp_exclude_from_menu' ] ) : null;
+
+		if ( ! empty( $post_ids ) && is_array( $post_ids ) ) {
+			foreach ( $post_ids as $post_id ) {
+				update_post_meta( $post_id, 'amfp_exclude_from_menu', $amfp_exclude_from_menu );
+			}
+		}
+
+		die();
 	}
 
 }
