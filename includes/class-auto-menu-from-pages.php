@@ -164,6 +164,7 @@ class Auto_Menu_From_Pages {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-auto-menu-from-pages-public.php';
 
+
 		$this->loader = new Auto_Menu_From_Pages_Loader();
 
 	}
@@ -250,6 +251,10 @@ class Auto_Menu_From_Pages {
 	 */
 	private function define_public_hooks() {
 		$plugin_public = Auto_Menu_From_Pages_Public::get_instance( $this );
+
+		// Filter widget instance (used with Simple Section Navigation for excluded pages)
+		$this->loader->add_filter( 'widget_display_callback', $plugin_public, 'filter_widget_instance', 10, 3 );
+
 	}
 
 	/**
@@ -262,6 +267,10 @@ class Auto_Menu_From_Pages {
 	private function define_shared_hooks() {
 		$plugin_shared = $this;
 	}
+
+	/*===========================================
+	 * Helper functions
+	===========================================*/
 
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
@@ -290,6 +299,29 @@ class Auto_Menu_From_Pages {
 	 */
 	public function get( $property = '' ) {
 		return $this->$property;
+	}
+
+	/**
+	 * Get IDs of pages set to be excluded from Auto Menu.
+	 *
+	 * @since     1.2.0
+	 *
+	 * @return    array    $exclude_ids    Array of excluded page ID's.
+	 */
+	public function get_excluded_page_ids() {
+
+		$args = array(
+			'post_type'      => 'page', // Only pages. . .
+			'meta_key'       => '_amfp_exclude_from_menu', // With exclude custom field set. . .
+			'meta_value'     => true, // With exclude custom field set. . .
+			'posts_per_page' => 500, // Set a reasonable limit on post count. . .
+			'fields'         => 'ids', // Return only ID's
+		);
+
+		$exclude_ids = get_posts( $args );
+
+		return $exclude_ids;
+
 	}
 
 }

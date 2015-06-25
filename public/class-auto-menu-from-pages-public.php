@@ -144,4 +144,36 @@ class Auto_Menu_From_Pages_Public {
 
 	}
 
+	/**
+	 * Filter widget instance.
+	 *
+	 * For use with Simple Section Nav plugin to incorporate excluded pages.
+	 *
+	 * @since    1.2.0
+	 *
+	 * @param    array        $instance    The current widget instance's settings.
+	 * @param    WP_Widget    $widget      The current widget instance.
+	 * @param    array        $args        An array of default widget arguments.
+	 */
+	public function filter_widget_instance( $instance, $widget, $args ) {
+
+		// Setup array of ID's of widgets to filter.
+		$widgets_to_filter = array( 'simple-section-nav' );
+
+		// Only proceed if we're filtering intended widgets.
+		if ( ! in_array( $widget->id_base, $widgets_to_filter ) ) {
+			return $instance;
+		}
+
+		// Get comma-separated list of excluded page ID's.
+		$exclude_ids_array = $this->plugin->get_excluded_page_ids();
+		$exclude_ids = implode( ',', $exclude_ids_array );
+
+		// Filter in excluded page ID's.
+		$instance['exclude'] = $exclude_ids;
+
+		return $instance;
+
+	}
+
 }
