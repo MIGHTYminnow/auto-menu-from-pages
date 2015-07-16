@@ -378,9 +378,10 @@ class Auto_Menu_From_Pages_Admin {
 	 * @return    bool      [description]
 	 */
 	public function has_excluded_ancestor( $page_id ) {
-
+		$title = get_post( $page_id )->post_title;
+		error_log( "$page_id : $title");
 		$parent_id = get_post( $page_id )->post_parent;
-
+		error_log( "  Parent: $parent_id");
 		// Return false if there's no parent.
 		if ( ! $parent_id ) {
 			return false;
@@ -388,11 +389,12 @@ class Auto_Menu_From_Pages_Admin {
 
 		// Get parent post.
 		$parent = get_post( $parent_id );
-
+		error_log( "  Excluded parent: " . get_post_meta( $parent->ID, '_amfp_exclude_from_menu', true ));
 		// Return true if parent is excluded.
 		if ( get_post_meta( $parent->ID, '_amfp_exclude_from_menu', true ) ) {
 			return true;
 		}
+		error_log( "  Recursing");
 
 		// Otherwise we have another ancestor to check
 		return $this->has_excluded_ancestor( $parent->ID );
