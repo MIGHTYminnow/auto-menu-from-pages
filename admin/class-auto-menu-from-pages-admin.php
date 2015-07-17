@@ -238,6 +238,8 @@ class Auto_Menu_From_Pages_Admin {
 	 */
 	public function maybe_sync_auto_menu() {
 
+		global $sitepress;
+
 		// Define actions that warrant rebuilding the menu.
 		$trigger_actions = array(
 			'amfp_force_update',
@@ -305,6 +307,17 @@ class Auto_Menu_From_Pages_Admin {
 			if ( $this->has_excluded_ancestor( $page->ID ) ) {
 				unset( $pages[ $index ] );
 				continue;
+			}
+
+			// Check if this is 
+			if ( function_exists( 'icl_object_id' ) ) {
+    			$default_lang = $sitepress->get_default_language();
+				$default_lang_page_id = icl_object_id( $page->ID, 'page', false, $default_lang );
+				
+				if ( $page->ID != $default_lang_page_id ) {
+					unset( $pages[ $index ] );
+					continue;
+				}
 			}
 
 			// Setup menu item database ID based on post ID.
