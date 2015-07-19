@@ -144,6 +144,31 @@ class Auto_Menu_From_Pages_Public {
 
 	}
 
+	public function filter_by_wpml_lang( $sorted_menu_items, $args ) {
+
+		global $sitepress;
+
+		$current_lang = $sitepress->locale();
+
+		if ( ! function_exists( 'wpml_get_language_information' ) || ! $current_lang ) {
+			return $sorted_menu_items;
+		}
+				
+
+		foreach ( $sorted_menu_items as $index => $item ) {
+
+			$page_id = $item->object_id;
+			$wpml_page_info = wpml_get_language_information( null, $page_id );
+
+			if ( empty( $wpml_page_info['locale'] ) || $current_lang != $wpml_page_info['locale'] ) {
+				unset( $sorted_menu_items[ $index ] );
+			}
+
+		}
+
+		return $sorted_menu_items;
+	}
+
 	/**
 	 * Filter widget instance.
 	 *

@@ -252,6 +252,9 @@ class Auto_Menu_From_Pages {
 	private function define_public_hooks() {
 		$plugin_public = Auto_Menu_From_Pages_Public::get_instance( $this );
 
+		// Filter menu output based on WPML language.
+		$this->loader->add_filter( 'wp_nav_menu_objects', $plugin_public, 'filter_by_wpml_lang', 10, 2 );
+
 		// Filter widget instance (used with Simple Section Navigation for excluded pages)
 		$this->loader->add_filter( 'widget_display_callback', $plugin_public, 'filter_widget_instance', 10, 3 );
 
