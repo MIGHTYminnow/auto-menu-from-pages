@@ -144,6 +144,16 @@ class Auto_Menu_From_Pages_Public {
 
 	}
 
+	/**
+	 * Filter menu output to only include current WPML language.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param array $sorted_menu_items Sorted menu items.
+	 * @param array $args              Args for menu items.
+	 *
+	 * @return array $sorted_menu_items Updated menu items, including only current language.
+	 */
 	public function filter_by_wpml_lang( $sorted_menu_items, $args ) {
 
 		global $sitepress;
@@ -153,7 +163,6 @@ class Auto_Menu_From_Pages_Public {
 		if ( ! function_exists( 'wpml_get_language_information' ) || ! $current_lang ) {
 			return $sorted_menu_items;
 		}
-				
 
 		foreach ( $sorted_menu_items as $index => $item ) {
 
