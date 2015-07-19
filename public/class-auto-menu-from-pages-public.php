@@ -158,11 +158,11 @@ class Auto_Menu_From_Pages_Public {
 
 		global $sitepress;
 
-		$current_lang = $sitepress->locale();
-
-		if ( ! function_exists( 'wpml_get_language_information' ) || ! $current_lang ) {
+		if ( ! function_exists( 'wpml_get_language_information' ) || ! $sitepress ) {
 			return $sorted_menu_items;
 		}
+
+		$current_lang = $sitepress->locale();
 
 		foreach ( $sorted_menu_items as $index => $item ) {
 
