@@ -158,7 +158,11 @@ class Auto_Menu_From_Pages_Public {
 
 		global $sitepress;
 
-		if ( ! function_exists( 'wpml_get_language_information' ) || ! $sitepress ) {
+		// Check if we're on the AMFP menu, and if WPML is active.
+		$is_auto_menu = ( $this->plugin_slug == $args->menu->slug );
+		$is_wpml_active = ( function_exists( 'wpml_get_language_information' ) || $sitepress );
+
+		if ( ! $is_auto_menu || ! $is_wpml_active ) {
 			return $sorted_menu_items;
 		}
 
