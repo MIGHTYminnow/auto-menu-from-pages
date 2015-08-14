@@ -223,11 +223,8 @@ class Auto_Menu_From_Pages_Admin {
 	 */
 	public function force_sync_auto_menu() {
 
-		// Fire action to force sync in maybe_sync_auto_menu.
-		do_action( 'amfp_force_sync' );
-
 		// Fire actual update function.
-		$this->maybe_sync_auto_menu();
+		$this->maybe_sync_auto_menu( true );
 
 	}
 
@@ -236,31 +233,35 @@ class Auto_Menu_From_Pages_Admin {
 	 *
 	 * @since  1.0.0
 	 */
-	public function maybe_sync_auto_menu() {
+	public function maybe_sync_auto_menu( $sync = false ) {
 
-		// Define actions that warrant rebuilding the menu.
-		$trigger_actions = array(
-			'amfp_force_update',
-			'amfp_force_sync',
-			'save_post',
-			'updated_option',
-			'load-pages_page_mypageorder', // My Page Order plugin
-		);
+		// If the $sync flag is there, proceed directly to building the menu,
+		// otherwise check whether one of our trigger actions has fired.
+		if ( ! $sync ) {
 
-		// Check if any have been triggered.
-		$update_menu = false;
-		foreach ( $trigger_actions as $action ) {
+			// Define actions that warrant rebuilding the menu.
+			$trigger_actions = array(
+				'amfp_force_update',
+				'amfp_force_sync',
+				'save_post',
+				'updated_option',
+				'load-pages_page_mypageorder', // My Page Order plugin
+			);
 
-			if ( did_action( $action ) ) {
-				$update_menu = true;
-				break;
+			// Check if any have been triggered.
+			$update_menu = false;
+			foreach ( $trigger_actions as $action ) {
+
+				if ( did_action( $action ) ) {
+					$update_menu = true;
+					break;
+				}
 			}
 
-		}
-
-		// Only run if something changed on this load.
-		if ( ! $update_menu ) {
-			return;
+			// Only run if something changed on this load.
+			if ( ! $update_menu ) {
+				return;
+			}
 		}
 
 		// Get auto menu ID.
@@ -269,7 +270,7 @@ class Auto_Menu_From_Pages_Admin {
 		// Get saved auto menu items.
 		$menu = wp_get_nav_menu_object( $auto_menu_id );
 
-		// Exit if the menu doesn't exist (edge case after deactivation)
+		// Exit if the menu doesn't exist (edge case after deactivation).
 		if ( empty( $menu->term_id ) ) {
 			return false;
 		}
