@@ -320,14 +320,7 @@ class Auto_Menu_From_Pages_Admin {
 				$parent_menu_item_db_id = $this->get_page_auto_menu_item_id( $page->post_parent );
 
 				// If the parent menu item hasn't already been created, create it now.
-				if ( ! is_nav_menu_item( $parent_menu_item_db_id ) ) {
-					$temp_menu_item_post = array(
-						'import_id' => $parent_menu_item_db_id, // Parameter used to force specific ID of new post.
-						'post_type' => 'nav_menu_item',
-					);
-
-					wp_insert_post( $temp_menu_item_post );
-				}
+				$this->create_new_nav_menu_item( $parent_menu_item_db_id );
 			}
 
 			// Set up menu item args from page.
@@ -340,14 +333,7 @@ class Auto_Menu_From_Pages_Admin {
 				'menu-item-status'    => 'publish',
 			);
 
-			if ( ! is_nav_menu_item( $menu_item_db_id ) ) {
-				$temp_menu_item_post = array(
-					'import_id' => $menu_item_db_id, // Parameter used to force specific ID of new post.
-					'post_type' => 'nav_menu_item',
-				);
-
-				wp_insert_post( $temp_menu_item_post );
-			}
+			$this->create_new_nav_menu_item( $menu_item_db_id );
 
 			$item = wp_update_nav_menu_item( $auto_menu_id, $menu_item_db_id, $args );
 
@@ -377,6 +363,25 @@ class Auto_Menu_From_Pages_Admin {
 			wp_die();
 		}
 
+	}
+
+	/**
+	 * Create a new 'nav_menu_item' post using the specified ID.
+	 *
+	 * @since  1.3.0
+	 *
+	 * @param  int  $menu_item_id  The menu item ID.
+	 */
+	public function create_new_nav_menu_item( $menu_item_id ) {
+
+		if ( ! is_nav_menu_item( $menu_item_id ) ) {
+			$menu_item_post = array(
+				'import_id' => $menu_item_id, // Parameter used to force specific ID of new post.
+				'post_type' => 'nav_menu_item',
+			);
+
+			wp_insert_post( $menu_item_post );
+		}
 	}
 
 	/**
