@@ -299,8 +299,6 @@ class Auto_Menu_From_Pages_Admin {
 		);
 		$pages = get_posts( $args );
 
-		trestle_log( $pages );
-
 		$i = 1;
 		foreach ( $pages as $index => $page ) {
 
@@ -336,13 +334,9 @@ class Auto_Menu_From_Pages_Admin {
 				);
 
 				wp_insert_post( $temp_menu_item_post );
-				trestle_log( 'just inserted post' );
-				trestle_log( $temp_menu_item_post );
 			}
 
 			$item = wp_update_nav_menu_item( $auto_menu_id, $menu_item_db_id, $args );
-
-			trestle_log( $item );
 
 			$i++;
 		}
@@ -416,13 +410,15 @@ class Auto_Menu_From_Pages_Admin {
 
 		// Check if page already has assigned menu item.
 		$menu_item_id = get_post_meta( $page_id, 'auto_menu_item_id', true );
-		if ( $menu_item_id ) {
+
+		// Confirm that we have a valid menu item ID, and return it if we do.
+		if ( $menu_item_id && is_nav_menu_item( $menu_item_id ) ) {
 			return $menu_item_id;
 		}
 
 		/**
-		 * If no menu item is set, then generate a new menu item ID by
-		 * incrementing the highest post ID in the database by one.
+		 * If no menu item is set or the value isn't good, generate a new menu item
+		 * ID by incrementing the highest post ID in the database by one.
 		 */
 
 		// Make sure ID isn't already taken.
@@ -433,7 +429,7 @@ class Auto_Menu_From_Pages_Admin {
 		$menu_item_id = ++$this->highest_db_post_id;
 
 		// Add post meta to hold ID of associated menu item.
-		add_post_meta( $page_id, 'auto_menu_item_id', $menu_item_id );
+		update_post_meta( $page_id, 'auto_menu_item_id', $menu_item_id );
 
 		return $menu_item_id;
 
