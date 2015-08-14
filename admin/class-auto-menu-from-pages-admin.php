@@ -308,7 +308,7 @@ class Auto_Menu_From_Pages_Admin {
 				continue;
 			}
 
-			// Setup menu item database ID based on post ID.
+			// Set up menu item database ID based on post ID.
 			$menu_item_db_id = $this->get_page_auto_menu_item_id( $page->ID );
 
 			// Set up menu item parent database ID.
@@ -409,7 +409,7 @@ class Auto_Menu_From_Pages_Admin {
 	public function get_page_auto_menu_item_id( $page_id ) {
 
 		// Check if page already has assigned menu item.
-		$menu_item_id = get_post_meta( $page_id, 'auto_menu_item_id', true );
+		$menu_item_id = get_post_meta( $page_id, '_amfp_menu_item_id', true );
 
 		// Confirm that we have a valid menu item ID, and return it if we do.
 		if ( $menu_item_id && is_nav_menu_item( $menu_item_id ) ) {
@@ -429,7 +429,7 @@ class Auto_Menu_From_Pages_Admin {
 		$menu_item_id = ++$this->highest_db_post_id;
 
 		// Add post meta to hold ID of associated menu item.
-		update_post_meta( $page_id, 'auto_menu_item_id', $menu_item_id );
+		update_post_meta( $page_id, '_amfp_menu_item_id', $menu_item_id );
 
 		return $menu_item_id;
 
