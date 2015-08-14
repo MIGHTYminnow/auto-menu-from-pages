@@ -339,7 +339,6 @@ class Auto_Menu_From_Pages_Admin {
 			$item = wp_update_nav_menu_item( $auto_menu_id, $menu_item_db_id, $args );
 
 			$i++;
-
 		}
 
 		// Get all non-excluded page ID's.
@@ -358,8 +357,6 @@ class Auto_Menu_From_Pages_Admin {
 			) {
 				wp_delete_post( $menu_item_id );
 			}
-
-
 		}
 
 		// Die properly if called via AJAX.
@@ -410,8 +407,6 @@ class Auto_Menu_From_Pages_Admin {
 	 * @return    int                Corresponding menu item ID.
 	 */
 	public function get_page_auto_menu_item_id( $page_id ) {
-
-		global $wpdb;
 
 		// Check if page already has assigned menu item.
 		$menu_item_id = get_post_meta( $page_id, 'auto_menu_item_id', true );
