@@ -212,7 +212,7 @@ class Auto_Menu_From_Pages {
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
 		// Add body class to distinguish auto menu admin page.
-		$this->loader->add_action( 'admin_body_class', $plugin_admin, 'admin_body_class' );
+		$this->loader->add_action( 'admin_body_class', $plugin_admin, 'admin_body_class', 99 );
 
 		// Do admin notices.
 		$this->loader->add_action( 'admin_notices', $plugin_admin, 'admin_notices' );

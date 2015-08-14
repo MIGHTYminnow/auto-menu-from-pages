@@ -118,7 +118,7 @@ class Auto_Menu_From_Pages_Admin {
 		$this->Mm_url = '//mightyminnow.com/plugin-landing-page?utm_source=' . $this->plugin_slug . '&utm_medium=plugin&utm_campaign=WordPress%20Plugins';
 
 		// Get highest post ID in database.
-		$highest_id_array = $wpdb->get_col( "SELECT max(ID) FROM wp_posts" );
+		$highest_id_array = $wpdb->get_col( "SELECT max(ID) FROM $wpdb->posts" );
 		$this->highest_db_post_id = $highest_id_array[0];
 
 	}
