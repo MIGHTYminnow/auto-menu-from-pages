@@ -299,6 +299,8 @@ class Auto_Menu_From_Pages_Admin {
 		);
 		$pages = get_posts( $args );
 
+		trestle_log( $pages );
+
 		$i = 1;
 		foreach ( $pages as $index => $page ) {
 
@@ -334,9 +336,13 @@ class Auto_Menu_From_Pages_Admin {
 				);
 
 				wp_insert_post( $temp_menu_item_post );
+				trestle_log( 'just inserted post' );
+				trestle_log( $temp_menu_item_post );
 			}
 
 			$item = wp_update_nav_menu_item( $auto_menu_id, $menu_item_db_id, $args );
+
+			trestle_log( $item );
 
 			$i++;
 		}
