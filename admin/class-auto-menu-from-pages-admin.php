@@ -313,8 +313,21 @@ class Auto_Menu_From_Pages_Admin {
 
 			// Set up menu item parent database ID.
 			$parent_menu_item_db_id = 0;
+
+			// If the post has a parent, ensure we have a menu item ID for the parent.
 			if ( $page->post_parent ) {
+
 				$parent_menu_item_db_id = $this->get_page_auto_menu_item_id( $page->post_parent );
+
+				// If the parent menu item hasn't already been created, create it now.
+				if ( ! is_nav_menu_item( $parent_menu_item_db_id ) ) {
+					$temp_menu_item_post = array(
+						'import_id' => $parent_menu_item_db_id, // Parameter used to force specific ID of new post.
+						'post_type' => 'nav_menu_item',
+					);
+
+					wp_insert_post( $temp_menu_item_post );
+				}
 			}
 
 			// Set up menu item args from page.
