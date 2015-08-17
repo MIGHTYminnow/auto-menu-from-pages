@@ -26,7 +26,7 @@
 				ajaxurl,
 				data,
 				function( response ) {
-					
+
 					// Add/remove success classes.
 					$link.removeClass( 'syncing' ).addClass( 'success' ).delay( 2000 ).queue(function(){
 						$(this).removeClass( 'success' ).dequeue();

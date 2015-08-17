@@ -228,7 +228,7 @@ class Auto_Menu_From_Pages {
 		$this->loader->add_action( 'save_post', $plugin_admin, 'save_metabox' );
 
 		// Synch menu via AJAX.
-		$this->loader->add_action( 'wp_ajax_sync_auto_menu', $plugin_admin, 'force_sync_auto_menu' );
+		$this->loader->add_action( 'wp_ajax_sync_auto_menu', $plugin_admin, 'sync_auto_menu' );
 
 		/**
 		 * Auto sync menu on shutdown.

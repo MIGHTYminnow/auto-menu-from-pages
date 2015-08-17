@@ -217,52 +217,47 @@ class Auto_Menu_From_Pages_Admin {
 	}
 
 	/**
-	 * Force sync auto menu.
-	 *
-	 * @since  1.1.0
-	 */
-	public function force_sync_auto_menu() {
-
-		// Fire actual update function.
-		$this->maybe_sync_auto_menu( true );
-
-	}
-
-	/**
 	 * Sync auto menu if certain actions have fired.
 	 *
 	 * @since  1.0.0
 	 */
-	public function maybe_sync_auto_menu( $sync = false ) {
+	public function maybe_sync_auto_menu() {
 
-		// If the $sync flag is there, proceed directly to building the menu,
-		// otherwise check whether one of our trigger actions has fired.
-		if ( ! $sync ) {
+		// Define actions that warrant rebuilding the menu.
+		$trigger_actions = array(
+			'amfp_force_update',
+			'amfp_force_sync',
+			'save_post',
+			'updated_option',
+			'load-pages_page_mypageorder', // My Page Order plugin
+		);
 
-			// Define actions that warrant rebuilding the menu.
-			$trigger_actions = array(
-				'amfp_force_update',
-				'amfp_force_sync',
-				'save_post',
-				'updated_option',
-				'load-pages_page_mypageorder', // My Page Order plugin
-			);
+		// Check if any have been triggered.
+		$update_menu = false;
+		foreach ( $trigger_actions as $action ) {
 
-			// Check if any have been triggered.
-			$update_menu = false;
-			foreach ( $trigger_actions as $action ) {
-
-				if ( did_action( $action ) ) {
-					$update_menu = true;
-					break;
-				}
-			}
-
-			// Only run if something changed on this load.
-			if ( ! $update_menu ) {
-				return;
+			if ( did_action( $action ) ) {
+				$update_menu = true;
+				break;
 			}
 		}
+
+		// Only run if something changed on this load.
+		if ( ! $update_menu ) {
+			return;
+		}
+
+		// Sync the auto menu if we've made it this far.
+		$this->sync_auto_menu();
+
+	}
+
+	/**
+	 * Force sync auto menu.
+	 *
+	 * @since  1.1.0
+	 */
+	public function sync_auto_menu() {
 
 		// Get auto menu ID.
 		$auto_menu_id = $this->get_auto_menu_id();
@@ -307,6 +302,8 @@ class Auto_Menu_From_Pages_Admin {
 				unset( $pages[ $index ] );
 				continue;
 			}
+
+			error_log( $page->post_title . '------------------' );
 
 			// Set up menu item database ID based on post ID.
 			$menu_item_db_id = $this->get_page_auto_menu_item_id( $page->ID );
@@ -428,6 +425,7 @@ class Auto_Menu_From_Pages_Admin {
 
 		// Check if page already has assigned menu item.
 		$menu_item_id = get_post_meta( $page_id, '_amfp_menu_item_id', true );
+		error_log( $menu_item_id);
 
 		// Confirm that we have a valid menu item ID, and return it if we do.
 		if ( $menu_item_id && is_nav_menu_item( $menu_item_id ) ) {
