@@ -1,10 +1,10 @@
 === Auto Menu From Pages ===
-Contributors:      McGuive7, MIGHTYminnow
+Contributors:      McGuive7, MIGHTYminnow, Braad
 Donate link:       http://wordpress.org/plugins/auto-menu-from-pages
 Tags:              auto, automatic, menu, navigation, page, hierarchy
 Requires at least: 3.5
 Tested up to:      4.3
-Stable tag:        1.2.0
+Stable tag:        1.3.0
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,6 +64,9 @@ At present, no. The menu auto generates based on your page hierarchy, and theref
 
 == Changelog ==
 
+= 1.3.0 =
+* Add support for installs with prefixed databases (solves issue of pages missing from menu).
+
 = 1.2.0 =
 * Add support to exclude pages from Simple Section Nav plugin.
 
@@ -85,6 +88,9 @@ At present, no. The menu auto generates based on your page hierarchy, and theref
 * First release
 
 == Upgrade Notice ==
+
+= 1.3.0 =
+* Add support for installs with prefixed databases (solves issue of pages missing from menu).
 
 = 1.2.0 =
 * Add support to exclude pages from Simple Section Nav plugin.
