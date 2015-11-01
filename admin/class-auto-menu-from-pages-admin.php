@@ -429,8 +429,14 @@ class Auto_Menu_From_Pages_Admin {
 		// Check if page already has assigned menu item.
 		$menu_item_id = get_post_meta( $page_id, '_amfp_menu_item_id', true );
 
-		// Confirm that we have a valid menu item ID, and return it if we do.
-		if ( $menu_item_id && is_nav_menu_item( $menu_item_id ) ) {
+		// Get object id (post it points to) of menu item.
+		$menu_item_object_id = get_post_meta( $menu_item_id, '_menu_item_object_id', true );
+
+		/**
+		 * If we already have a valid menu item ID, and it's points to
+		 * this post, then return it.
+		 */
+		if ( $menu_item_id && is_nav_menu_item( $menu_item_id ) && $menu_item_object_id == $page_id ) {
 			return $menu_item_id;
 		}
 
