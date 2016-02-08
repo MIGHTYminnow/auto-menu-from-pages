@@ -217,6 +217,16 @@ class Auto_Menu_From_Pages_Admin {
 	}
 
 	/**
+	 * Map page auto menu item IDs
+	 *
+	 * @since 1.3.1
+	 */
+	public function map_page_auto_menu_item_ids( $page ) {
+
+	    return $this->get_page_auto_menu_item_id( $page->ID );
+	}
+
+	/**
 	 * Force sync auto menu.
 	 *
 	 * @since  1.1.0
@@ -341,9 +351,7 @@ class Auto_Menu_From_Pages_Admin {
 		}
 
 		// Get all non-excluded page ID's.
-		$included_menu_item_ids = array_map( function( $page ) {
-			return $this->get_page_auto_menu_item_id( $page->ID );
-		}, $pages );
+		$included_menu_item_ids = array_map( array( $this, 'map_page_auto_menu_item_ids' ), $pages );
 
 		// Remove any items that aren't published or are otherwise excluded.
 		foreach ( $menu_item_ids as $menu_item_id ) {
