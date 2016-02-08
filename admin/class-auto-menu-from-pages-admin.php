@@ -226,7 +226,6 @@ class Auto_Menu_From_Pages_Admin {
 	    return $this->get_page_auto_menu_item_id( $page->ID );
 	}
 
-
 	/**
 	 * Force sync auto menu.
 	 *
