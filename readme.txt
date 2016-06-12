@@ -4,7 +4,7 @@ Donate link:       http://wordpress.org/plugins/auto-menu-from-pages
 Tags:              auto, automatic, menu, navigation, page, hierarchy
 Requires at least: 3.5
 Tested up to:      4.6
-Stable tag:        1.3.2
+Stable tag:        1.3.3
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -64,8 +64,11 @@ At present, no. The menu auto generates based on your page hierarchy, and theref
 
 == Changelog ==
 
-= 1.3.2 =
+= 1.3.3 =
 * Fix: broken admin animation (thanks @jgonzo127)
+
+= 1.3.2 =
+* Fix: extract map_page_auto_menu_item_ids() to prevent errors in PHP <= 5.3
 
 = 1.3.1 =
 * Fix: some pages not being added to menu (issue of more than one page pointing to the same menu item).
@@ -95,8 +98,11 @@ At present, no. The menu auto generates based on your page hierarchy, and theref
 
 == Upgrade Notice ==
 
-= 1.3.2 =
+= 1.3.3 =
 * Fix: broken admin animation (thanks @jgonzo127)
+
+= 1.3.2 =
+* Fix: extract map_page_auto_menu_item_ids() to prevent errors in PHP <= 5.3
 
 = 1.3.1 =
 * Fix: some pages not being added to menu (issue of more than one page pointing to the same menu item).
