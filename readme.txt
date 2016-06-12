@@ -65,7 +65,7 @@ At present, no. The menu auto generates based on your page hierarchy, and theref
 == Changelog ==
 
 = 1.3.2 =
-* Fix: broken admin animation
+* Fix: broken admin animation (thanks @jgonzo127)
 
 = 1.3.1 =
 * Fix: some pages not being added to menu (issue of more than one page pointing to the same menu item).
@@ -96,7 +96,7 @@ At present, no. The menu auto generates based on your page hierarchy, and theref
 == Upgrade Notice ==
 
 = 1.3.2 =
-* Fix: broken admin animation
+* Fix: broken admin animation (thanks @jgonzo127)
 
 = 1.3.1 =
 * Fix: some pages not being added to menu (issue of more than one page pointing to the same menu item).
