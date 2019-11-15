@@ -236,9 +236,7 @@ class Auto_Menu_From_Pages {
 		 * By default, this feature is turned off, and can be enabled via the
 		 * amfp_auto_sync_menu filter.
 		 */
-		if ( is_admin() && apply_filters( 'amfp_auto_sync_menu', false ) ) {
-			$this->loader->add_action( 'shutdown', $plugin_admin, 'maybe_sync_auto_menu', 15 ); // Load after Exclude Pages plugin.
-		}
+		$this->loader->add_action( 'shutdown', $plugin_admin, 'is_auto_sync_enabled', 15 ); // Load after Exclude Pages plugin.
 
 	}
 

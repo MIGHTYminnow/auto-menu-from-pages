@@ -239,6 +239,18 @@ class Auto_Menu_From_Pages_Admin {
 	}
 
 	/**
+	 * Check if Auto Sync hook is enabled.
+	 *
+	 * By default, auto sync is turned off to avoid overhead,
+	 * and can be enabled via the amfp_auto_sync_menu filter.
+	 */
+	public function is_auto_sync_enabled() {
+		if ( is_admin() && apply_filters( 'amfp_auto_sync_menu', false ) ) {
+			$this->maybe_sync_auto_menu( true );
+		}
+	}
+
+	/**
 	 * Sync auto menu if certain actions have fired.
 	 *
 	 * @since  1.0.0
@@ -344,7 +356,9 @@ class Auto_Menu_From_Pages_Admin {
 			);
 
 			$this->create_new_nav_menu_item( $menu_item_db_id );
-
+			if ( is_admin() && apply_filters( 'amfp_auto_sync_menu', false ) ) {
+				remove_all_actions( 'wp_update_nav_menu_item' );
+			}
 			$item = wp_update_nav_menu_item( $auto_menu_id, $menu_item_db_id, $args );
 
 			$i++;
