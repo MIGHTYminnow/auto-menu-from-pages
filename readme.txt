@@ -2,9 +2,9 @@
 Contributors:      McGuive7, MIGHTYminnow, Braad, jgonzo127
 Donate link:       http://wordpress.org/plugins/auto-menu-from-pages
 Tags:              auto, automatic, menu, navigation, page, hierarchy
-Requires at least: 3.5
-Tested up to:      4.6
-Stable tag:        1.3.3
+Requires at least: 5.3
+Tested up to:      5.3
+Stable tag:        1.3.4
 License:           GPLv2 or later
 License URI:       http://www.gnu.org/licenses/gpl-2.0.html
 
