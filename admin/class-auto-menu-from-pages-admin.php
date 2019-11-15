@@ -68,6 +68,15 @@ class Auto_Menu_From_Pages_Admin {
 	private $highest_db_post_id;
 
 	/**
+	 * Is auto sync enabled?
+	 * 
+	 * @since	1.3.4
+	 * @access	private
+	 * @var		bool		$is_auto_sync_enabled
+	 */
+	private $is_auto_sync_enabled;
+
+	/**
 	 * MIGHTYminnow admin link.
 	 *
 	 * @since    1.0.0
@@ -121,6 +130,7 @@ class Auto_Menu_From_Pages_Admin {
 		$highest_id_array = $wpdb->get_col( "SELECT max(ID) FROM $wpdb->posts" );
 		$this->highest_db_post_id = $highest_id_array[0];
 
+		$this->is_auto_sync_enabled = false;
 	}
 
 	/**
@@ -246,6 +256,7 @@ class Auto_Menu_From_Pages_Admin {
 	 */
 	public function is_auto_sync_enabled() {
 		if ( is_admin() && apply_filters( 'amfp_auto_sync_menu', false ) ) {
+			$this->is_auto_sync_enabled = true;
 			$this->maybe_sync_auto_menu( true );
 		}
 	}
@@ -356,7 +367,7 @@ class Auto_Menu_From_Pages_Admin {
 			);
 
 			$this->create_new_nav_menu_item( $menu_item_db_id );
-			if ( is_admin() && apply_filters( 'amfp_auto_sync_menu', false ) ) {
+			if ( $this->is_auto_sync_enabled ) {
 				remove_all_actions( 'wp_update_nav_menu_item' );
 			}
 			$item = wp_update_nav_menu_item( $auto_menu_id, $menu_item_db_id, $args );
